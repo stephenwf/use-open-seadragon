@@ -1,0 +1,57 @@
+{
+  "name": "fesk-ts",
+  "version": "1.0.0",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "main": "dist/umd/fesk-ts.js",
+  "module": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "author": "Stephen Fraser <stephen.fraser@digirati.com>",
+  "scripts": {
+    "build": "fesk-build --cjs --umd && tsc -p ./ --emitDeclarationOnly",
+    "start": "fesk-start --cjs",
+    "build-types": "tsc -p ./ --emitDeclarationOnly",
+    "test": "jest",
+    "build:prod": "NODE_ENV=production fesk-build --cjs --umd && tsc -p ./ --emitDeclarationOnly"
+  },
+  "devDependencies": {
+    "@fesk/babel-config": "^1.3.0-next.2945936d",
+    "@fesk/eslint-config-standard": "^1.2.2",
+    "@fesk/scripts": "^1.4.0-pr.b3558389",
+    "@storybook/addon-knobs": "^5.2.4",
+    "@types/enzyme": "^3.10.3",
+    "@types/jest": "^24.0.9",
+    "@types/react": "^16.9.9",
+    "@types/react-dom": "^16.9.2",
+    "@types/react-test-renderer": "^16.9.1",
+    "@typescript-eslint/eslint-plugin": "^2.4.0",
+    "@typescript-eslint/parser": "^2.4.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react-hooks": "^2.1.2",
+    "jest": "^24.9.0",
+    "react-test-renderer": "^16.10.2",
+    "sass-loader": "^8.0.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.3"
+  },
+  "fesk": {
+    "typescript": true,
+    "port": 5000,
+    "metalsmith": {
+      "nunjucks": {
+        "liveServerPort": 35735
+      }
+    }
+  },
+  "dependencies": {
+    "@storybook/react": "^5.2.4",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2"
+  }
+}
