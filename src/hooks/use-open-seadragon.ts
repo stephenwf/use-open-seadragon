@@ -60,6 +60,13 @@ export function useOpenSeadragon(
     setViewer(
       new OpenSeadragon({
         element: osdRef.current,
+        // Hide controls by default, since user must add path to UI to
+        // render images.
+        showSequenceControl: false,
+        showNavigationControl: false,
+        showZoomControl: false,
+        showHomeControl: false,
+        showFullPageControl: false,
         ...osdOptions,
       })
     );

@@ -4,8 +4,11 @@ import { Viewport } from './viewport';
 import { Overlay, OverlayOptions } from './overlay';
 import { Point, SimplePoint } from './point';
 import { Rect, SimpleRect } from './rect';
-import { Placement } from './members';
-import { GestureSettings } from './config/gesture-settings';
+import { ControlAnchor, Placement } from './members';
+import {
+  GestureSettings,
+  UserGestureSettings,
+} from './config/gesture-settings';
 import {
   ComplexTileSource,
   TiledImageSpecifier,
@@ -18,7 +21,13 @@ import { MouseTracker } from './mouse-tracker';
 import { TileSource } from './tile-sources/tile-source';
 import { Tile } from './tile';
 import { TiledImage } from './tiled-image';
-import {World} from "./world";
+import { World } from './world';
+import { NavImages } from './config/nav-images';
+import { ButtonGroup } from './button-group';
+import { Control } from './control';
+import { Button } from './button';
+import { ImageLoader } from './image-loader';
+import { TileCache } from './tile-cache';
 
 export type ViewerEvents =
   | {
@@ -452,12 +461,140 @@ export type ViewerEvents =
     };
 
 export interface Viewer extends EventSource<ViewerEvents>, ControlDock {
-  canvas: HTMLCanvasElement | HTMLDivElement; // not sure which.
+  // Undocumented
+  id: string;
+  hash: number;
+  overlaysContainer: HTMLDivElement;
+  collectionDrawer: Drawer | null;
+  collectionViewport: Viewport | null;
+  navImages: NavImages;
+  buttons: ButtonGroup;
+  crossOriginPolicy: boolean;
+  ajaxWithCredentials: boolean;
+  ajaxHeaders: any;
+  loadTilesWithAjax: boolean;
+  panHorizontal: boolean;
+  panVertical: boolean;
+  constrainDuringPan: boolean;
+  wrapHorizontal: boolean;
+  wrapVertical: boolean;
+  visibilityRatio: number;
+  minPixelRatio: number;
+  defaultZoomLevel: number;
+  minZoomLevel: number | null;
+  maxZoomLevel: number | null;
+  homeFillsViewer: boolean;
+  clickTimeThreshold: number;
+  clickDistThreshold: number;
+  dblClickTimeThreshold: number;
+  dblClickDistThreshold: number;
+  springStiffness: number;
+  animationTime: number;
+  gestureSettingsMouse: UserGestureSettings;
+  gestureSettingsTouch: UserGestureSettings;
+  gestureSettingsPen: UserGestureSettings;
+  gestureSettingsUnknown: UserGestureSettings;
+  zoomPerClick: number;
+  zoomPerScroll: number;
+  zoomPerSecond: number;
+  blendTime: number;
+  alwaysBlend: boolean;
+  autoHideControls: boolean;
+  immediateRender: boolean;
+  minZoomImageRatio: number;
+  maxZoomPixelRatio: number;
+  smoothTileEdgesMinZoom: number;
+  iOSDevice: boolean;
+  pixelsPerWheelLine: number;
+  pixelsPerArrowPress: number;
+  autoResize: boolean;
+  preserveImageSizeOnResize: boolean;
+  minScrollDeltaTime: number;
+  rotationIncrement: number;
+  showSequenceControl: boolean;
+  sequenceControlAnchor: ControlAnchor | null;
+  preserveViewport: boolean;
+  preserveOverlays: boolean;
+  navPrevNextWrap: boolean;
+  showNavigationControl: boolean;
+  navigationControlAnchor: ControlAnchor | null;
+  showZoomControl: boolean;
+  showHomeControl: boolean;
+  showFullPageControl: boolean;
+  showRotationControl: boolean;
+  showFlipControl: boolean;
+  controlsFadeDelay: number;
+  controlsFadeLength: number;
+  mouseNavEnabled: boolean;
+  showNavigator: boolean;
+  navigatorId: number;
+  navigatorPosition:
+    | 'ABSOLUTE'
+    | 'TOP_LEFT'
+    | 'TOP_RIGHT'
+    | 'BOTTOM_LEFT'
+    | 'BOTTOM_RIGHT';
+  navigatorSizeRatio: number;
+  navigatorMaintainSizeRatio: boolean;
+  navigatorTop: number | null;
+  navigatorLeft: number | null;
+  navigatorHeight: number | null;
+  navigatorWidth: number | null;
+  navigatorAutoResize: boolean;
+  navigatorAutoFade: boolean;
+  navigatorRotate: boolean;
+  navigatorBackground: string;
+  navigatorOpacity: number;
+  navigatorBorderColor: string;
+  navigatorDisplayRegionColor: string;
+  degrees: number;
+  flipped: boolean;
+  opacity: number;
+  preload: boolean;
+  compositeOperation: CompositeOperation | null;
+  imageSmoothingEnabled: boolean;
+  placeholderFillStyle: string | null;
+  showReferenceStrip: boolean;
+  referenceStripScroll: 'horizontal' | 'veritcal';
+  referenceStripElement: HTMLElement | null;
+  referenceStripHeight: number | null;
+  referenceStripWidth: number | null;
+  referenceStripPosition:
+    | 'TOP_LEFT'
+    | 'TOP_RIGHT'
+    | 'BOTTOM_LEFT'
+    | 'BOTTOM_RIGHT';
+  referenceStripSizeRatio: number;
+  collectionRows: number;
+  collectionColumns: number;
+  collectionLayout: 'horizontal';
+  collectionMode: boolean;
+  collectionTileSize: number;
+  collectionTileMargin: number;
+  imageLoaderLimit: number;
+  maxImageCacheCount: number;
+  timeout: number;
+  useCanvas: boolean;
+  prefixUrl: string;
+  debugMode: boolean;
+  controls: Control[];
+  homeButton: Button;
+  zoomInButton: Button;
+  zoomOutButton: Button;
+  fullPageButton: Button;
+  innerTracker: MouseTracker;
+  outerTracker: MouseTracker;
+  imageLoader: ImageLoader;
+  tileCache: TileCache;
+  controlsShouldFade: boolean;
+  controlsFadeBeginTime: number;
+
+  canvas: HTMLDivElement; // not sure which.
   container: HTMLDivElement;
   drawer: Drawer;
   element: HTMLElement;
   initialPage: number;
-  navigator: Navigator;
+  navigator: Navigator | null;
   viewport: Viewport;
   world: World;
 
