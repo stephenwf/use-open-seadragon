@@ -48,12 +48,14 @@ export const Overlay: React.FC<OverlayProps> = ({
   }, [viewer, isReady]);
 
   useEffect(() => {
-    const overlay = viewer.getOverlayById(rootElemRef.current);
-    overlay.update(
-      !height || !width
-        ? new OpenSeadragon.Point(x, y)
-        : new OpenSeadragon.Rect(x, y, width, height)
-    );
+    if (isReady) {
+      const overlay = viewer.getOverlayById(rootElemRef.current);
+      overlay.update(
+        !height || !width
+          ? new OpenSeadragon.Point(x, y)
+          : new OpenSeadragon.Rect(x, y, width, height)
+      );
+    }
   }, [height, viewer, width, x, y]);
 
   return ReactDOM.createPortal(children, rootElemRef.current);
