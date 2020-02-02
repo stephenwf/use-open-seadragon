@@ -28,4 +28,3 @@ jobs:
       - run: yarn install --frozen-lockfile --non-interactive
       - run: yarn run build
       - run: yarn run build-types
-#      - run: yarn run test
