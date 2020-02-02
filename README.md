@@ -2,6 +2,23 @@
 Hook for easily using OpenSeadragon with React. Declarative API with full Typescript 
 definitions (including all of OpenSeadragon types).
 
+```
+npm install use-open-seadragon --save
+```
+
+```
+yarn add use-open-seadragon
+```
+
+Optionally, if you are using the React hooks, you can install React and ReactDOM. OpenSeadragon itself is bundled in 
+the UMD if you want to [grab it directly](http://unpkg.com/use-open-seadragon) to embed.
+
+## Features
+- Fully typed OpenSeadragon
+- Hooks sagely access to the viewer, viewport etc.
+- Wrapper around OSD events for React (and [100% type support](https://github.com/stephenwf/use-open-seadragon/blob/master/src/types/viewer.ts#L32-L461) for the OSD API)
+- Small: 2kb extra on-top of OSD
+
 ## Examples
 
 Simple hook usage to display a viewer:
@@ -64,6 +81,35 @@ export default function App() {
 }
 ```
 [![Edit use-open-seadragon-overlay](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/use-open-seadragon-overlay-ir64g?fontsize=14&hidenavigation=1&theme=dark)
+
+### Using events
+In this example we are subscribing to "update-viewport" and grabbing some values from the viewport and
+setting them on state. These are then returned as an Overlay which can be rendered inside of the viewer.
+```jsx
+import { Overlay, useViewerEvent } from "use-open-seadragon";
+
+function CurrentPosition() {
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
+
+  useViewerEvent("update-viewport", ev => {
+    setX(ev.eventSource.viewport.getBoundsNoRotate().x);
+    setY(ev.eventSource.viewport.getBoundsNoRotate().y);
+  });
+
+  return (
+    <Overlay>
+      <div style={{ background: "#fff" }}>
+        {x}, {y}
+      </div>
+    </Overlay>
+  );
+}
+```
+You will get completion for [all](https://github.com/stephenwf/use-open-seadragon/blob/master/src/types/viewer.ts#L32-L461) [of](https://github.com/stephenwf/use-open-seadragon/blob/master/src/types/mouse-tracker.ts#L21-L163) [the](https://github.com/stephenwf/use-open-seadragon/blob/master/src/types/button.ts#L6-L42) events dispatched.
+
+This library comes with a few pre-canned hooks that will probably grow. But it also comes now with all of the building 
+blocks you would need to create custom hooks around the viewer.
 
 ## OpenSeadragon without React
 If you want OpenSeadragon without react, but with all the types then you can try them out by importing:
