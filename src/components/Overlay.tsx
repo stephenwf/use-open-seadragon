@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { useViewerContext } from '../hooks/use-viewer-context';
 import { Placement } from '../types/members';
 import { Point } from '../types/point';
+import { OpenSeadragon } from '../open-seadragon';
 
 type OverlayProps = {
   x: number;
@@ -31,7 +32,10 @@ export const Overlay: React.FC<OverlayProps> = ({
     if (isReady) {
       viewer.addOverlay({
         element: rootElemRef.current,
-        location: { x, y, height, width },
+        location:
+          !height || !width
+            ? new OpenSeadragon.Point(x, y)
+            : new OpenSeadragon.Rect(x, y, width, height),
         ...props,
       });
     }
@@ -45,7 +49,11 @@ export const Overlay: React.FC<OverlayProps> = ({
 
   useEffect(() => {
     const overlay = viewer.getOverlayById(rootElemRef.current);
-    overlay.update({ x, y, height, width });
+    overlay.update(
+      !height || !width
+        ? new OpenSeadragon.Point(x, y)
+        : new OpenSeadragon.Rect(x, y, width, height)
+    );
   }, [height, viewer, width, x, y]);
 
   return ReactDOM.createPortal(children, rootElemRef.current);

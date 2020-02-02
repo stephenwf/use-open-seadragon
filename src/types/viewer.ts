@@ -602,7 +602,7 @@ export interface Viewer extends EventSource<ViewerEvents>, ControlDock {
   addOverlay(options: OverlayOptions): void;
   addOverlay(
     element: HTMLElement | string,
-    location: Point | Rect | SimplePoint | SimpleRect,
+    location: Point | Rect,
     placement: Placement,
     onDraw: (position: Point, size: Point, element: HTMLElement) => void
   ): void;
