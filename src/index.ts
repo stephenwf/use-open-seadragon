@@ -10,3 +10,4 @@ export * from './hooks/use-viewer-event';
 export * from './hooks/use-viewer-context';
 export * from './hooks/use-viewer-state';
 export * from './hooks/use-zoom';
+export * from './components/Overlay';
