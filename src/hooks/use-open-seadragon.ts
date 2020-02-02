@@ -7,13 +7,15 @@ import { OpenSeadragon } from '../open-seadragon';
 import { useViewerState } from './use-viewer-state';
 import { useIsViewerReady } from './use-is-viewer-ready';
 import { TiledImage } from '../types/tiled-image';
+import { UserOpenSeadragonOptions } from '../types/config/options';
 
 export function useOpenSeadragon(
   tileSources: Array<
     { tileSource: TileSourceSpecifier; index: number } & Partial<
       TiledImageSpecifier
     >
-  > = []
+  > = [],
+  osdOptions: UserOpenSeadragonOptions = {}
 ) {
   const osdRef = useRef<HTMLDivElement | null>(null);
   const [viewer, setViewer] = useViewerState();
@@ -58,29 +60,10 @@ export function useOpenSeadragon(
     setViewer(
       new OpenSeadragon({
         element: osdRef.current,
-        ajaxWithCredentials: false,
-        showNavigator: true,
-        showRotationControl: true,
-        defaultZoomLevel: 0,
-        maxZoomPixelRatio: 1,
-        navigatorPosition: 'BOTTOM_RIGHT',
-        animationTime: 0.3,
-        immediateRender: true,
-        preserveViewport: true,
-        blendTime: 0.1,
-        minPixelRatio: 0.5,
-        visibilityRatio: 0.65,
-        minZoomImageRatio: 1,
-        constrainDuringPan: false,
-        showSequenceControl: false,
-        showNavigationControl: false,
-        showZoomControl: true,
-        showHomeControl: false,
-        showFullPageControl: false,
-        sequenceMode: true,
+        ...osdOptions,
       })
     );
-  }, [setViewer]);
+  }, [osdOptions, setViewer]);
 
   useLayoutEffect(() => {
     if (viewer) {
