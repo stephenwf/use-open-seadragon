@@ -63,7 +63,10 @@ export function useOpenSeadragon(
         ...osdOptions,
       })
     );
-  }, [osdOptions, setViewer]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setViewer]);
+
+  // @todo if the OSD options change, how do you re-apply them?
 
   useLayoutEffect(() => {
     if (viewer) {
