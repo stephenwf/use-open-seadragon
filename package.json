@@ -1,10 +1,11 @@
 {
   "name": "use-open-seadragon",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "license": "MIT",
   "files": [
     "dist",
-    "lib"
+    "lib",
+    "open-seadragon.js"
   ],
   "main": "dist/umd/use-open-seadragon.js",
   "module": "lib/index.js",
