@@ -38,12 +38,14 @@ export const Overlay: React.FC<OverlayProps> = ({
             : new OpenSeadragon.Rect(x, y, width, height),
         ...props,
       });
+      const rootEl = rootElemRef.current;
+      return () => {
+        if (viewer) {
+          viewer.removeOverlay(rootEl);
+        }
+      };
     }
-
-    const rootEl = rootElemRef.current;
-    return () => {
-      viewer.removeOverlay(rootEl);
-    };
+    return;
     // eslint-disable-next-line
   }, [viewer, isReady]);
 
