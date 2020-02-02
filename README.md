@@ -106,6 +106,8 @@ function CurrentPosition() {
   );
 }
 ```
+[![Edit use-open-seadragon-events](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/use-open-seadragon-events-1y9e9?fontsize=14&hidenavigation=1&theme=dark)
+
 You will get completion for [all](https://github.com/stephenwf/use-open-seadragon/blob/master/src/types/viewer.ts#L32-L461) [of](https://github.com/stephenwf/use-open-seadragon/blob/master/src/types/mouse-tracker.ts#L21-L163) [the](https://github.com/stephenwf/use-open-seadragon/blob/master/src/types/button.ts#L6-L42) events dispatched.
 
 This library comes with a few pre-canned hooks that will probably grow. But it also comes now with all of the building 
