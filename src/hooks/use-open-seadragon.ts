@@ -9,12 +9,14 @@ import { useIsViewerReady } from './use-is-viewer-ready';
 import { TiledImage } from '../types/tiled-image';
 import { UserOpenSeadragonOptions } from '../types/config/options';
 
-export function useOpenSeadragon(
-  tileSources: Array<
-    { tileSource: TileSourceSpecifier; index: number } & Partial<
+type AsyncAddTileSpecifier =
+  | TileSourceSpecifier
+  | ({ tileSource: TileSourceSpecifier; index: number } & Partial<
       TiledImageSpecifier
-    >
-  > = [],
+    >);
+
+export function useOpenSeadragon(
+  tileSources: Array<AsyncAddTileSpecifier> | AsyncAddTileSpecifier = [],
   osdOptions: UserOpenSeadragonOptions = {}
 ) {
   const osdRef = useRef<HTMLDivElement | null>(null);
@@ -22,11 +24,14 @@ export function useOpenSeadragon(
   const [isReady, setIsReady] = useIsViewerReady(viewer);
 
   const asyncAddTile = useCallback(
-    (
-      options: { tileSource: TileSourceSpecifier; index: number } & Partial<
-        TiledImageSpecifier
-      >
-    ): Promise<void> => {
+    (options: AsyncAddTileSpecifier): Promise<void> => {
+      if (!options.tileSource) {
+        options = {
+          tileSource: options,
+          index: 0,
+        };
+      }
+
       return new Promise((success, err) => {
         if (!viewer) {
           return;
@@ -77,9 +82,12 @@ export function useOpenSeadragon(
 
   useLayoutEffect(() => {
     if (viewer) {
-      Promise.all(tileSources.map(tileSource => asyncAddTile(tileSource))).then(
-        goHome
-      );
+      const tileSourcesArray = Array.isArray(tileSources)
+        ? tileSources
+        : [tileSources];
+      Promise.all(
+        tileSourcesArray.map(tileSource => asyncAddTile(tileSource))
+      ).then(goHome);
     }
 
     return () => {
@@ -90,5 +98,5 @@ export function useOpenSeadragon(
     };
   }, [asyncAddTile, goHome, setIsReady, tileSources, viewer]);
 
-  return [osdRef, { isReady, goHome }] as const;
+  return [osdRef, { isReady, goHome, asyncAddTile, viewer }] as const;
 }

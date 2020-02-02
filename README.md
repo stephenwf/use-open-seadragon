@@ -1,51 +1,22 @@
-# FESK Typescript
-FESK + Typescript boilerplate. 
+# use-open-seadragon
 
-## Installation
-Change package.json:
-```json
-{
-  "name": "{PACKAGE_NAME}",
-  "main": "dist/umd/{PACKAGE_NAME}.js"
+
+
+```jsx
+import React from "react";
+import { useOpenSeadragon } from "use-open-seadragon";
+import exampleTileSource from "./exampleTileSource";
+
+function Viewer({ tiles }) {
+  const [ref] = useOpenSeadragon(tiles);
+
+  return (
+    <div ref={ref} style={{ height: 600, width: 800, position: "relative" }} />
+  );
+}
+
+export default function App() {
+  return <Viewer tiles={exampleTileSource} />;
 }
 ```
 
-## Customisations
-Some customisations.
-
-### Remove server (libraries)
-```json
-{
-  "start": "fesk-start --cjs --noServer"
-}
-```
- 
-### Storybook
-Create `FILENAME.stories.tsx`
-```typescript
-import React from 'react';
-
-export default { title: 'CATEGORY LABEL| COMPONENT_NAME' };
-
-export const ExampleName: React.FC = () => {
-  return <div>Some story</div>
-};
-```
-
-Example of custom configuration: https://github.com/digirati-co-uk/capture-models/tree/feature/context-behaviours/.storybook
-
-### Ports
-Package json:
-```json
-{
-  "fesk": {
-    "typescript": true,
-    "port": 5000,
-    "metalsmith": {
-      "nunjucks": {
-        "liveServerPort": 35735
-      }
-    }
-  }
-}
-```
