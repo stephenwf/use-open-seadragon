@@ -1,13 +1,13 @@
 import { LiteralTileSourceConfiguration, TileSource } from './tile-source';
 
-type ZoomifySourceEvents = never;
+type ZoomifyTileSourceEvents = never;
 
-export interface ZoomifySource
-  extends TileSource<ZoomifySource, ZoomifySourceEvents> {
+export interface ZoomifyTileSource
+  extends TileSource<ZoomifyTileSource, ZoomifyTileSourceEvents> {
   supports(data: any, url?: string): boolean;
 }
 
-export interface ZoomifySourceStatic {
+export interface ZoomifyTileSourceStatic {
   new (
     config: {
       width: number;
@@ -16,5 +16,5 @@ export interface ZoomifySourceStatic {
       tileSize?: number;
       tileOverlap?: number;
     } & Partial<LiteralTileSourceConfiguration>
-  ): ZoomifySource;
+  ): ZoomifyTileSource;
 }

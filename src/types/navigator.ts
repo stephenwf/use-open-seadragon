@@ -7,7 +7,7 @@ import {
 } from './tile-sources/complex-tile-source';
 import { TiledImage } from './tiled-image';
 
-type NavigatorOptions = { viewer: Viewer } & Partial<{
+export type NavigatorOptions = { viewer: Viewer } & Partial<{
   id: string;
   autoFade: boolean;
   element: HTMLElement;
@@ -22,7 +22,7 @@ type NavigatorOptions = { viewer: Viewer } & Partial<{
   controlOptions: ControlOptions;
 }>;
 
-interface Navigator extends Viewer {
+export interface Navigator extends Viewer {
   updateSize(): void;
   setFlip(state: boolean): this;
   setDisplayTransform(rule: string): void;
@@ -36,6 +36,6 @@ interface Navigator extends Viewer {
   ): void;
 }
 
-interface NavigatorStatic {
+export interface NavigatorStatic {
   new (options: NavigatorOptions): Navigator;
 }

@@ -1,5 +1,5 @@
-import { Point } from './point';
-import { Viewer } from './viewer';
+import { Point, PointStatic, SimplePoint } from './point';
+import { Viewer, ViewerStatic } from './viewer';
 import {
   BROWSERS,
   ButtonState,
@@ -8,11 +8,71 @@ import {
   OverlayRotationMode,
   Placement,
 } from './members';
-import { UserOpenSeadragonOptions } from './config/options';
+import {
+  OpenSeadragonOptions,
+  UserOpenSeadragonOptions,
+} from './config/options';
+import { ButtonStatic } from './button';
+import { ImageTileSourceStatic } from './tile-sources/image-tile-source';
+import { ControlStatic } from './control';
+import { OverlayStatic } from './overlay';
+import { TmsTileSourceStatic } from './tile-sources/tms-tile-source';
+import { RectStatic } from './rect';
+import { ReferenceStripStatic } from './reference-strip';
+import { TileSourceStatic } from './tile-sources/tile-source';
+import { MouseTrackerStatic } from './mouse-tracker';
+import { ControlDockStatic } from './control-dock';
+import { TileCacheStatic } from './tile-cache';
+import { IIIFTileSourceStatic } from './tile-sources/iiif-tile-source';
+import { ImageLoaderStatic } from './image-loader';
+import { DrawerStatic } from './drawer';
+import { EventSourceStatic } from './event-source';
+import { ViewportStatic } from './viewport';
+import { WorldStatic } from './world';
+import { TileStatic } from './tile';
+import { DisplayRectStatic } from './display-rect';
+import { DziTileSourceStatic } from './tile-sources/dzi-tile-source';
+import { ButtonGroupStatic } from './button-group';
+import { LegacyTileSourceStatic } from './tile-sources/legacy-tile-source';
+import { OsmTileSourceStatic } from './tile-sources/osm-tile-source';
+import { SpringStatic } from './spring';
+import { TiledImageStatic } from './tiled-image';
+import { NavigatorStatic } from './navigator';
+import { ZoomifyTileSourceStatic } from './tile-sources/zoomify-tile-source';
 
 export interface OpenSeadragon {
   new (options?: UserOpenSeadragonOptions): Viewer;
   (options?: UserOpenSeadragonOptions): Viewer;
+
+  Button: ButtonStatic;
+  ButtonGroup: ButtonGroupStatic;
+  Control: ControlStatic;
+  ControlDock: ControlDockStatic;
+  DisplayRect: DisplayRectStatic;
+  Drawer: DrawerStatic;
+  DziTileSource: DziTileSourceStatic;
+  EventSource: EventSourceStatic;
+  IIIFTileSource: IIIFTileSourceStatic;
+  ImageLoader: ImageLoaderStatic;
+  ImageTileSource: ImageTileSourceStatic;
+  LegacyTileSource: LegacyTileSourceStatic;
+  MouseTracker: MouseTrackerStatic;
+  Navigator: NavigatorStatic;
+  OsmTileSource: OsmTileSourceStatic;
+  Overlay: OverlayStatic;
+  Point: PointStatic;
+  Rect: RectStatic;
+  ReferenceStrip: ReferenceStripStatic;
+  Spring: SpringStatic;
+  Tile: TileStatic;
+  TileCache: TileCacheStatic;
+  TiledImage: TiledImageStatic;
+  TileSource: TileSourceStatic;
+  TmsTileSource: TmsTileSourceStatic;
+  Viewer: ViewerStatic;
+  Viewport: ViewportStatic;
+  World: WorldStatic;
+  ZoomifyTileSource: ZoomifyTileSourceStatic;
 
   Browser: {
     vendor: BROWSERS;
@@ -44,6 +104,8 @@ export interface OpenSeadragon {
     BOTTOM_RIGHT: ControlAnchor.BOTTOM_RIGHT;
     ABSOLUTE: ControlAnchor.ABSOLUTE;
   };
+
+  DEFAULT_SETTINGS: OpenSeadragonOptions;
 
   fullScreenApi: {
     supportsFullScreen: boolean;
@@ -161,4 +223,60 @@ export interface OpenSeadragon {
   isPlainObject(input: unknown): boolean;
 
   isWindow(input: unknown): boolean;
+
+  jsonp(options: {
+    url: string;
+    callback: any;
+    param: string;
+    callbackName: string;
+  }): void;
+
+  makeAjaxRequest(options: {
+    url: string;
+    success?: (o: any) => void;
+    error?: (o: any) => void;
+    headers?: any;
+    responseType: string;
+    withCredentials?: boolean;
+  }): void;
+
+  makeCenteredNode(element: HTMLElement): HTMLElement;
+
+  makeNeutralElement(tagName: string): HTMLElement;
+
+  makeTransparentImage(src: string): Element;
+
+  now(): number;
+
+  parseJSON<T = any>(string: string): T;
+
+  parseXml<T extends Document = Document>(string: string): T;
+
+  pointInElement(
+    element: HTMLElement | string,
+    point: Point | SimplePoint
+  ): boolean;
+
+  positiveModulo(number: number, modulo: number): number;
+
+  removeClass(element: HTMLElement | string, className: string): void;
+
+  /** @deprecated */
+  removeEvent(...args: any[]): void;
+
+  setElementOpacity(
+    element: HTMLElement,
+    opacity: number,
+    usesAlpha?: boolean
+  ): void;
+
+  setElementTouchActionNone(element: HTMLElement): void;
+
+  setPageScroll(): Point;
+
+  setString(property: string, value: any): void;
+
+  stopEvent(event: any): void;
+
+  type(): any;
 }

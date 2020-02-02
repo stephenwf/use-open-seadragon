@@ -259,6 +259,6 @@ export interface MouseTracker<UD = any> extends MouseTrackerHandlers {
   setTracking(track: MouseTracker): MouseTracker;
 }
 
-export interface MouseTrackerStatic<UD> {
-  new (options: MouseTrackerOptions<UD>): MouseTracker;
+export interface MouseTrackerStatic {
+  new <UD>(options: MouseTrackerOptions<UD>): MouseTracker;
 }

@@ -20,6 +20,6 @@ export interface Point {
   toString(): string;
 }
 
-export interface StaticPoint {
+export interface PointStatic {
   new (x?: number, y?: number): Point;
 }
