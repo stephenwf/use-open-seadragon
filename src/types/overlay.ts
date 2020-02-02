@@ -5,18 +5,21 @@ import { Viewport } from './viewport';
 
 export type OverlayOptions = {
   element: HTMLElement;
-  location: Point | Rect | SimplePoint | SimpleRect;
-} & Partial<{
-  placement: Placement;
-  onDraw: (position: Point, size: Point, element: HTMLElement) => void;
-  checkResize: boolean;
-  width: number;
-  height: number;
-  rotationMode: number;
-}>;
+} & (
+  | { location: Point | Rect | SimplePoint | SimpleRect }
+  | { x: number; y: number }
+) &
+  Partial<{
+    placement: Placement;
+    onDraw: (position: Point, size: Point, element: HTMLElement) => void;
+    checkResize: boolean;
+    width: number;
+    height: number;
+    rotationMode: number;
+  }>;
 
 export interface Overlay {
-  adjust(position: Point, size: Point): void;
+  adjust(position: Point | SimplePoint, size: Point | SimplePoint): void;
   destroy(): void;
   drawHTML(container: HTMLElement): void;
   getBounds(viewport: Viewport): Rect;
