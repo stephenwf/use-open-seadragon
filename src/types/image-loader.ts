@@ -6,7 +6,7 @@ export type ImageLoaderOptions = Partial<{
 export type ImageLoaderJobOptions = {
   src: string;
   loadWithAjax: boolean;
-  ajaxHeaders: any;
+  ajaxHeaders?: { [header: string]: string } | null;
   crossOriginPolicy: string | boolean;
   ajaxWithCredentials: boolean;
   callback: (job: ImageJob) => void;

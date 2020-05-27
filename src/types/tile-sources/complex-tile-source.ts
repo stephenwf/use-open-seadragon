@@ -29,7 +29,7 @@ export type TiledImageSpecifier = {
   compositeOperation: string;
   crossOriginPolicy: string;
   ajaxWithCredentials: boolean;
-  loadTilesWithAjax: any;
+  loadTilesWithAjax: boolean;
   error: (event: { message: string; source: any }) => void;
   success: (item: TiledImage) => void;
   collectionImmediately: boolean;

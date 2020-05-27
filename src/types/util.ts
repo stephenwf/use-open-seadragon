@@ -11,6 +11,8 @@ export type PartialOrNull<T> = {
   [P in keyof T]?: T[P] | null;
 };
 
+export type AjaxHeaders = { [key: string]: string } | null | undefined;
+
 // type ExamplePayload =
 //   | {
 //       type: 'test-b';

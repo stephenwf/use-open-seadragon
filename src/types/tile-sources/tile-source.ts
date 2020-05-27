@@ -1,5 +1,5 @@
 import { BaseEvent, EventSource } from '../event-source';
-import { NonFunctionProperties } from '../util';
+import { AjaxHeaders, NonFunctionProperties } from '../util';
 import { Point } from '../point';
 import { Rect } from '../rect';
 
@@ -34,7 +34,7 @@ type TileSourceConfiguration =
         // @todo make this a `ready` event payload.
         success: (event: any) => void;
         ajaxWithCredentials: boolean;
-        ajaxHeaders: any;
+        ajaxHeaders: AjaxHeaders;
       } & LiteralTileSourceConfiguration
     >
   | LiteralTileSourceConfiguration;
@@ -54,7 +54,7 @@ export interface TileSource<
   getLevelScale(level: number): number;
   getNumTiles(level: number): number;
   getPixelRatio(level: number): number;
-  getTileAjaxHeaders(level: number, x: number, y: number): any;
+  getTileAjaxHeaders(level: number, x: number, y: number): AjaxHeaders;
   getTileAtPoint(level: number, point: Point): Point;
   getTileBounds(level: number, x: number, y: number, isSource?: boolean): Rect;
   getTileHeight(level: number): number;

@@ -28,6 +28,7 @@ import { Control } from './control';
 import { Button } from './button';
 import { ImageLoader } from './image-loader';
 import { TileCache } from './tile-cache';
+import { AjaxHeaders } from './util';
 
 export type ViewerEvents =
   | {
@@ -471,7 +472,7 @@ export interface Viewer extends EventSource<ViewerEvents>, ControlDock {
   buttons: ButtonGroup;
   crossOriginPolicy: boolean;
   ajaxWithCredentials: boolean;
-  ajaxHeaders: any;
+  ajaxHeaders: AjaxHeaders;
   loadTilesWithAjax: boolean;
   panHorizontal: boolean;
   panVertical: boolean;

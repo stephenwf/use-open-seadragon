@@ -27,7 +27,7 @@ export interface ReferenceStrip {
   panelWidth: number;
   panels: HTMLElement[];
   minPixelRatio: number;
-  miniViewers: any; // ???
+  miniViewers: { [key: string]: Viewer };
   setFocus(page: number): void;
   update(): void;
   destroy(): void;

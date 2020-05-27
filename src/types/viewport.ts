@@ -37,11 +37,11 @@ export interface Viewport {
     deltaPixels: Point | SimplePoint,
     current?: boolean
   ): Point;
-  ensureVisible(immediately?: any): Viewport;
-  fitBounds(bounds: Rect | SimpleRect, immediately?: any): Viewport;
+  ensureVisible(immediately?: boolean): Viewport;
+  fitBounds(bounds: Rect | SimpleRect, immediately?: boolean): Viewport;
   fitBoundsWithConstraints(
     bounds: Rect | SimpleRect,
-    immediately?: any
+    immediately?: boolean
   ): Viewport;
   fitHorizontally(immediately?: boolean): Viewport;
   fitVertically(immediately?: boolean): Viewport;

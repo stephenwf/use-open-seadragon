@@ -1,6 +1,7 @@
 import { Rect, SimpleRect } from './rect';
 import { Point } from './point';
 import { ImageRecord } from './image-record';
+import { AjaxHeaders } from './util';
 
 export interface Tile {
   // Required
@@ -12,7 +13,7 @@ export interface Tile {
   exists: boolean;
   url: string;
   loadWithAjax: boolean;
-  ajaxHeaders: any;
+  ajaxHeaders: AjaxHeaders;
   cacheKey: string;
   loaded: boolean;
   loading: boolean;
@@ -62,7 +63,7 @@ export interface TileStatic {
     url: string,
     context2D: CanvasRenderingContext2D,
     loadWithAjax: boolean,
-    ajaxHeaders: any,
+    ajaxHeaders: AjaxHeaders,
     sourceBounds: Rect | SimpleRect
   ): Tile;
 }

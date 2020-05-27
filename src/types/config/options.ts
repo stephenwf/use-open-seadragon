@@ -1,5 +1,5 @@
 import { ComplexTileSource } from '../tile-sources/complex-tile-source';
-import { PartialOrNull } from '../util';
+import { AjaxHeaders, PartialOrNull } from '../util';
 import { GestureSettings, UserGestureSettings } from './gesture-settings';
 import { ControlAnchor } from '../members';
 import { TiledImage } from '../tiled-image';
@@ -21,7 +21,7 @@ export type OpenSeadragonOptions = {
   crossOriginPolicy: boolean;
   ajaxWithCredentials: boolean;
   loadTilesWithAjax: boolean;
-  ajaxHeaders: any;
+  ajaxHeaders: AjaxHeaders;
 
   //PAN AND ZOOM SETTINGS AND CONSTRAINTS
   panHorizontal: boolean;

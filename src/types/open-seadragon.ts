@@ -168,7 +168,7 @@ export interface OpenSeadragon {
     options?: boolean | AddEventListenerOptions
   ): void;
 
-  cancelEvent(event: any): void;
+  cancelEvent(event: PointerEvent): void;
 
   capitalizeFirstLetter(string: string): string;
 
@@ -235,7 +235,7 @@ export interface OpenSeadragon {
     url: string;
     success?: (o: any) => void;
     error?: (o: any) => void;
-    headers?: any;
+    headers?: { [headers: string]: string } | null;
     responseType: string;
     withCredentials?: boolean;
   }): void;
@@ -276,7 +276,7 @@ export interface OpenSeadragon {
 
   setString(property: string, value: any): void;
 
-  stopEvent(event: any): void;
+  stopEvent(event: PointerEvent): void;
 
   type(): any;
 }
